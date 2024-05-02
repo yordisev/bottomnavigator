@@ -1,103 +1,94 @@
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:bottomnavigator/screens/vista1.dart';
+import 'package:bottomnavigator/screens/vista2.dart';
+import 'package:bottomnavigator/screens/vista3.dart';
 import 'package:flutter/material.dart';
 
-class PruebaScreen extends StatelessWidget {
+class PageViewDemo extends StatefulWidget {
+  const PageViewDemo({Key? key}) : super(key: key);
+
+  @override
+  State<PageViewDemo> createState() => _PageViewDemoState();
+}
+
+class _PageViewDemoState extends State<PageViewDemo> {
+  PageController _pageController = PageController();
+  int selectedPage = 0;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _pageController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Hola Mundo'),
-      ),
-      bottomNavigationBar: Opc2(),
+      body: Column(children: [buildPageView(), buildBottomNav()]),
     );
   }
-}
 
-// class Opc1 extends StatefulWidget {
-//   @override
-//   State<Opc1> createState() => _Opc1State();
-// }
+  Widget buildPageView() {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.92,
+      child: PageView(
+        controller: _pageController,
+        children: [Vista1Screen(), Vista2Screen(), Vista3Screen()],
+        onPageChanged: (index) {
+          onPageChange(index);
+        },
+      ),
+    );
+  }
 
-// class _Opc1State extends State<Opc1> {
-//   int selectedIndex = 0;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return CustomNavigationBar(
-//       iconSize: 30.0,
-//       selectedColor: Colors.white,
-//       strokeColor: Colors.white,
-//       unSelectedColor: Color(0xff6c788a),
-//       backgroundColor: Color(0xff040307),
-//       items: [
-//         CustomNavigationBarItem(
-//           icon: Icon(Icons.home),
-//         ),
-//         CustomNavigationBarItem(
-//           icon: Icon(Icons.shopping_cart),
-//         ),
-//         CustomNavigationBarItem(
-//           icon: Icon(Icons.lightbulb_outline),
-//         ),
-//         CustomNavigationBarItem(
-//           icon: Icon(Icons.search),
-//         ),
-//         CustomNavigationBarItem(
-//           icon: Icon(Icons.account_circle),
-//         ),
-//       ],
-//       currentIndex: selectedIndex,
-//       onTap: (value) {
-//         setState(() {
-//           selectedIndex = value;
-//         });
-//       },
-//     );
-//   }
-// }
-
-class Opc2 extends StatefulWidget {
-  @override
-  State<Opc2> createState() => _Opc2State();
-}
-
-class _Opc2State extends State<Opc2> {
-  int selectedIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return CustomNavigationBar(
-      iconSize: 30.0,
-      selectedColor: Colors.white,
-      strokeColor: Colors.white,
-      unSelectedColor: Colors.grey[600],
-      backgroundColor: Colors.black,
-      borderRadius: Radius.circular(20.0),
-      blurEffect: true,
-      opacity: 0.8,
+  Widget buildBottomNav() {
+    return BottomNavigationBar(
+      currentIndex: selectedPage,
+      backgroundColor: Colors.green,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.black,
       items: [
-        CustomNavigationBarItem(
-          icon: Icon(Icons.home),
+        BottomNavigationBarItem(
+          icon: const Icon(
+            Icons.two_wheeler,
+            size: 30,
+          ),
+          activeIcon: const Icon(
+            Icons.two_wheeler,
+            size: 35,
+          ),
+          label: 'Motors',
+          // backgroundColor: colors.primary,
         ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart),
+        BottomNavigationBarItem(
+          icon: const Icon(
+            Icons.person_3_outlined,
+            size: 30,
+          ),
+          activeIcon: const Icon(Icons.person_3_outlined, size: 35),
+          label: 'Users',
+          // backgroundColor: colors.tertiary,
         ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.lightbulb_outline),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.search),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
+        BottomNavigationBarItem(
+          icon: const Icon(
+            Icons.settings,
+            size: 30,
+          ),
+          activeIcon: const Icon(Icons.settings, size: 35),
+          label: 'Ajuste',
+          // backgroundColor: colors.tertiary,
         ),
       ],
-      currentIndex: selectedIndex,
-      onTap: (value) {
-        setState(() {
-          selectedIndex = value;
-        });
+      onTap: (int index) {
+        _pageController.animateToPage(index,
+            duration: Duration(microseconds: 1000), curve: Curves.easeIn);
       },
-      isFloating: true,
     );
+  }
+
+  onPageChange(int index) {
+    setState(() {
+      selectedPage = index;
+    });
   }
 }

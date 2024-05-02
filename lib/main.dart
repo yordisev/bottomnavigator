@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: MainScreen(),
-      // home: PruebaScreen(),
+      // home: MainScreen(),
+      home: PageViewDemo(),
     );
   }
 }

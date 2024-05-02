@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Vista2Screen extends StatelessWidget {
+class Vista3Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'menu2',
+          'menu3',
           style: GoogleFonts.montserratAlternates(
               color: Colors.green, fontSize: 25, fontWeight: FontWeight.bold),
         ),
@@ -23,7 +23,7 @@ class Vista2Screen extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Vista Numero 2',
+          'Vista Numero 3',
           style: TextStyle(fontSize: 50, fontWeight: FontWeight.w800),
         ),
       ),
