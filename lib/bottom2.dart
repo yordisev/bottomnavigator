@@ -46,7 +46,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
       currentIndex: selectedPage,
       backgroundColor: Colors.green,
       selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.black,
+      unselectedItemColor: Colors.white70,
       items: [
         BottomNavigationBarItem(
           icon: const Icon(
